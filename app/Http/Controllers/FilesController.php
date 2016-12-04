@@ -78,7 +78,7 @@ class FilesController extends Controller
                   ->getAdapter()
                   ->getPathPrefix();
 
-                $tempThumbPath .= '/' . $file->thumb;
+                $tempThumbPath .= $file->thumb;
 
                 $video
                     ->frame(FFMpeg\Coordinate\TimeCode::fromSeconds(0))
