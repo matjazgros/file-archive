@@ -35,7 +35,7 @@ class UsersController extends Controller
   {
     $this->validate($request, [
       'email' => 'required|email|unique:users,email',
-      'password' => 'required|size:6',
+      'password' => 'required|min:6',
       'password1' => 'required|same:password',
     ],[
       'password1.required' => 'The confirm password field is required.',

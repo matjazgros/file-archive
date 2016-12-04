@@ -28,9 +28,11 @@ class FilesController extends Controller
 
         if ($request->file($varName)->isValid()) {
 
+          $disk = Storage::disk(env('STORAGE', 'local'));
+
           $file = new File;
           $file->name    = $request->file->getClientOriginalName();
-          $file->path    = $request->file->store('files');
+          $file->path    = $request->file($varName)->store('files', env('STORAGE', 'local'));
           $file->user_id = $request->user()->id;
           $file->hash    = null;
           $file->mime    = Input::file($varName)->getMimeType();
@@ -43,6 +45,7 @@ class FilesController extends Controller
           $file->hash  = Uuid::generate(5, $file->id, Uuid::NS_DNS);
           $file->save();
 
+
           switch ($file->mime) {
             case 'image/jpeg':
             case 'image/jpg':
@@ -52,14 +55,14 @@ class FilesController extends Controller
                 ->resize(150, 150)
                 ->encode(str_replace('image/', '', $file->mime));
 
-              Storage::put($file->thumb, $image);
+              $disk->put($file->thumb, $image);
 
               break;
             case 'video/mp4':
               // TODO: get paths from config
               $ffmpeg = FFMpeg\FFMpeg::create([
-                'ffmpeg.binaries'  => '/Users/matjazg/.local/bin/ffmpeg',
-                'ffprobe.binaries' => '/Users/matjazg/.local/bin/ffprobe'
+                'ffmpeg.binaries'  => env('FFMPEG', '/usr/bin/ffmpeg'),
+                'ffprobe.binaries' => env('FFPROBE', '/usr/bin/ffprobe')
               ]);
 
               $video = $ffmpeg
@@ -70,7 +73,7 @@ class FilesController extends Controller
 
                 $file->thumb = str_replace('.mp4', '.png', $file->thumb);
 
-                $tempThumbPath = Storage::disk('local')
+                $tempThumbPath = $disk
                   ->getDriver()
                   ->getAdapter()
                   ->getPathPrefix();
@@ -81,7 +84,7 @@ class FilesController extends Controller
                     ->frame(FFMpeg\Coordinate\TimeCode::fromSeconds(0))
                     ->save($tempThumbPath);
 
-                Storage::put($file->thumb, file_get_contents($tempThumbPath));
+                $disk->put($file->thumb, file_get_contents($tempThumbPath));
                 $file->save();
                 unlink($tempThumbPath);
 
@@ -116,8 +119,8 @@ class FilesController extends Controller
       if (!$file) {
         return Response::make('', 404);
       }
-
-      return Response::make(Storage::get($file->path), '200', [
+      $disk = Storage::disk(env('STORAGE', 'local'));
+      return Response::make($disk->get($file->path), '200', [
         'Content-Type'        => 'application/octet-stream',
         'Content-Disposition' => 'attachment; filename="'.$file->name.'"'
       ]);
@@ -130,9 +133,9 @@ class FilesController extends Controller
       if (!$file) {
         return Response::make('', 404);
       }
-
       if ($file->thumb) {
-        $data = Storage::get($file->thumb);
+        $disk = Storage::disk(env('STORAGE', 'local'));
+        $data = $disk->get($file->thumb);
       } else {
         // return empty/white image
         $canvas = Image::canvas(1, 1, '#fff');
@@ -149,11 +152,11 @@ class FilesController extends Controller
       $file = File::where('id', $id)->where('user_id', $request->user()->id)->first();
 
       if ($file) {
-
         $other = File::where('path', $file->path)->get();
         if ($other && sizeof($other) == 1) {
-          $file->path && Storage::delete($file->path);
-          $file->thumb && Storage::delete($file->thumb);
+          $disk = Storage::disk(env('STORAGE', 'local'));
+          $file->path && $disk->delete($file->path);
+          $file->thumb && $disk->delete($file->thumb);
         }
 
         $file->delete();
