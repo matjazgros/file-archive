@@ -18,9 +18,10 @@ class CreateFilesTable extends Migration
             $table->integer('user_id');
             $table->string('name', 255);
             $table->string('path', 255);
-            $table->string('hash', 255);
-            $table->string('thumb', 255);
+            $table->string('hash', 255)->nullable();
+            $table->string('thumb', 255)->nullable();
             $table->string('mime', 255);
+            // TODO: url
             $table->integer('size');
             $table->timestamps();
         });
