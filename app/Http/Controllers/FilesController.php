@@ -73,7 +73,7 @@ class FilesController extends Controller
 
                 $file->thumb = str_replace('.mp4', '.png', $file->thumb);
 
-                $tempThumbPath = $disk
+                $tempThumbPath = Storage::disk('local')
                   ->getDriver()
                   ->getAdapter()
                   ->getPathPrefix();
