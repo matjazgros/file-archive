@@ -1,0 +1,8 @@
+#bg-overlay.bg-img.img-balloon
+
+.cls-header.cls-header-lg
+  .cls-brand
+    a.box-inline href="/"
+      span.brand-title
+        | FILE
+        span.text-thin Archive

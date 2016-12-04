@@ -1,0 +1,8 @@
+footer#footer
+  p.pad-lft
+    | &#0169; 2016 matjaz@grosek.si
+
+if errorMessage
+  #floating-top-right.floating-container
+    .alert-wrap.in.animated.jellyIn
+      .alert.alert-warning = errorMessage

@@ -1,0 +1,31 @@
+.row
+  .col-md-8.col-md-offset-2.col-sm-10.col-sm-offset-1
+    .text-center style="padding: 40px;"
+      = file-upload loading=isSending
+
+    .panel.mar-top class=sortedFiles.length:shw:hidden
+      .panel-body
+        table.table.table-hover.table-vcenter.mar-no
+          tbody
+            each sortedFiles as |file index|
+
+              tr class=file.isDeleted:deleted
+                td style="width: 70px;"
+                  a href=file.downloadUrl
+                    img.img-md src=file.thumbUrl alt=""
+                td
+                  span.text-main.text-semibold = file.name
+                  br
+                  span.text-muted uploaded #{file.createdFromNow}
+                td
+                  span = file.fileSize
+                td.text-right
+                  a.btn.btn-success href=file.downloadUrl
+                    i.fa.fa-download
+
+                  if file.confirmDelete
+                    a.btn.btn-danger.mar-lft click="'delete' file" href="#"
+                      i.fa.fa-check
+                  else
+                    a.btn.btn-default.mar-lft click="'confirmDelete' file" href="#"
+                      i.fa.fa-trash

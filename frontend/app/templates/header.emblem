@@ -1,0 +1,25 @@
+header#navbar
+  #navbar-container.boxed
+
+    .clearfix
+      h4.pull-left.mar-lft
+        = link-to "index" href="#"
+          | FILE
+          span.text-thin Archive
+
+      ul.nav.navbar-top-links.pull-right
+
+        li#dropdown-user.dropdown
+          a.dropdown-toggle.text-right href="#" data-toggle="dropdown"
+            .username.pull-left style="margin: 0px;"
+              i.fa.fa-user aria-hidden="true"
+            .username
+              currentUser.email
+              | &nbsp;&nbsp;
+
+          .dropdown-menu.dropdown-menu-right.panel-success
+            .pad-all.text-right
+              a.btn.btn-default.btn-block href="#" click="invalidateSession"
+                i.fa.fa-unlock
+                | &nbsp;Logout
+

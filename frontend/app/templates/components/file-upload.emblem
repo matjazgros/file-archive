@@ -1,0 +1,6 @@
+.dz-default.dz-message
+  .dz-icon
+    i.fa.icon-5x class={loading:fa-refresh:fa-cloud-upload loading:fa-spin}
+    .mar-top
+      span.dz-text Drop files anywhere in window
+      p.text-sm.text-muted or click here to pick manually

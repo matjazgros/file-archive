@@ -1,0 +1,46 @@
+
+.cls-content#register
+  .cls-content-sm.panel
+    .panel-body
+      .row
+        .col-sm-12
+
+          h4.signup-title Create new account
+          p.pad-btm
+
+          form submit="register"
+            .row
+              .col-sm-12
+                .form-group class="{{ if error.email 'has-error' ''}}"
+                  .input-group
+                    .input-group-addon
+                      i.fa.fa-envelope
+                    = input class="form-control input-lg" placeholder='Email' value=email
+
+                  if errorMessage.email
+                    small.help-block style="" = errorMessage.email
+
+              .col-sm-12
+                .form-group class="{{ if error.password 'has-error' ''}}"
+                  .input-group
+                    .input-group-addon
+                      i.fa.fa-asterisk
+                    = input class="form-control input-lg" placeholder='Password' type="password" value=password
+
+                  if errorMessage.password
+                    small.help-block style="" = errorMessage.password
+
+              .col-sm-12
+                .form-group class="{{ if error.password1 'has-error' ''}}"
+                  .input-group
+                    .input-group-addon
+                      i.fa.fa-asterisk
+                    = input class="form-control input-lg" placeholder='Confirm Password' type="password" value=password1
+
+                  if errorMessage.password1
+                    small.help-block style="" = errorMessage.password1
+
+                button.btn.btn-primary.text-uppercase.btn-block.btn-lg type="submit" disabled="{{disabled}}" Create account
+
+  .pad-ver
+    = link-to 'login' class="btn-link" | Already have an account?

@@ -1,0 +1,11 @@
+#container.effect.navbar-fixed.drop class="{{if isAuthTemplate 'cls-container'}}"
+  if isAuthTemplate
+    = partial 'header-auth'
+    = outlet
+  else
+    = partial 'header'
+    .boxed
+      #content-container
+        = outlet
+
+    = partial 'footer'

@@ -1,0 +1,30 @@
+
+.cls-content
+  .cls-content-sm.panel
+    .panel-body
+      h4.signup-title Sign In to your account
+      p.pad-btm
+
+      form submit="authenticate"
+        if errorMessage
+          .form-group
+            .alert.alert-danger.mar-top
+              = errorMessage
+        .form-group
+          .input-group
+            .input-group-addon
+              i.fa.fa-envelope
+
+            = input class="form-control input-lg" placeholder='Email' value=identification autofocus="autofocus"
+
+        .form-group
+          .input-group
+            .input-group-addon
+              i.fa.fa-asterisk
+
+            = input class="form-control input-lg" placeholder='Password' type='password' value=password
+
+        button.btn.btn-primary.text-uppercase.btn-block.btn-lg type="submit" Sign In
+
+  .pad-ver
+    = link-to 'register' class="btn-link mar-rgt" | Create a new account
