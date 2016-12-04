@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => 's3',
+    'default' => 'local',
 
     /*
     |--------------------------------------------------------------------------
@@ -56,10 +56,10 @@ return [
 
         's3' => [
             'driver' => 's3',
-            'key' => 'AKIAIHNG5FWQJA6YE43A',
-            'secret' => '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',
-            'region' => 'eu-central-1',
-            'bucket' => 'filearchivedemo',
+            'key' => env('S3KEY', null),
+            'secret' => env('S3SECRET', null),
+            'region' => env('S3REGION', null),
+            'bucket' => env('S3BUCKET', null),
         ],
 
     ],
