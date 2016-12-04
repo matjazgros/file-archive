@@ -15,7 +15,7 @@ class UsersController extends Controller
 {
   public function me(Request $request)
   {
-    return User::find($request->user()->id);
+    return ['user' => User::find($request->user()->id)];
   }
 
   public function login(Request $request)
