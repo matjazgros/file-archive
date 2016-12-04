@@ -5,9 +5,17 @@
 
 #container .table {
   tbody {
-    tr:first-child {
+    tr {
+      &:first-child {
+        td {
+          border-top: 0;
+        }
+      }
+
       td {
-        border-top: 0;
+        .btn {
+          width: 40px;
+        }
       }
     }
   }
