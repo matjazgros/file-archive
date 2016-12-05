@@ -59,7 +59,7 @@ class FilesController extends Controller
 
               break;
             case 'video/mp4':
-              // TODO: get paths from config
+
               $ffmpeg = FFMpeg\FFMpeg::create([
                 'ffmpeg.binaries'  => env('FFMPEG', '/usr/bin/ffmpeg'),
                 'ffprobe.binaries' => env('FFPROBE', '/usr/bin/ffprobe')
