@@ -22,8 +22,7 @@ export default DS.Model.extend({
 
   createdFromNow: function() {
     let date = moment.utc(this.get('created_at'), 'YYYY-MM-DD HH:mm:ss').toDate();
-    console.log(date);
-    return moment(date).format('YYYY-MM-DD HH:mm:ss')
+    return moment(date).fromNow();
   }.property('created_at'),
 
   fileSize: function() {
