@@ -35,7 +35,7 @@ FFPROBE=/usr/bin/ffprobe
 
 ### Production
 
-Run in root folder `make install`. Check for Nginx settings below.
+Run in root folder `make install`. Check for Nginx settings below and don't forget to change `files.grosek.si`.
 
 ### Development
 
@@ -46,20 +46,9 @@ Run in root folder `make develop` and wait until `Serving on http://localhost:42
 ### Nginx
 ```
 server {
-  listen 80;
-  listen [::]:80;
-  server_name files.grosek.si;
-  return 301 https://$server_name$request_uri;
-}
-
-server {
-    listen [::]:443 ssl;
-    listen 443 ssl;
+    listen 80;
+    listen [::]:80;
     server_name files.grosek.si;
-
-    ssl_certificate /etc/letsencrypt/live/files.grosek.si/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/files.grosek.si/privkey.pem;
-    ssl_dhparam /etc/ssl/certs/dhparam.pem;
 
     index index.html index.htm index.php;
 
