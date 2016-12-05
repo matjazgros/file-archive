@@ -33,7 +33,6 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
     invalidateSession() {
       if (this.get('session.isAuthenticated')) {
         this.get('session').invalidate();
-        this.transitionTo('index');
       }
       return false;
     }
