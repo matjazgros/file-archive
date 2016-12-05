@@ -3,7 +3,7 @@
 ## About
 Demo project using Laravel PHP framework on backend and EmberJS on frontend.
 
-Dependancies:
+Dependencies:
   - PHP
   - MySQL
   - npm
