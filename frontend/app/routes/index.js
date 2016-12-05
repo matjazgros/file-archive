@@ -6,8 +6,8 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
   beforeModel: function() {
     this._super(...arguments);
     if (this.get('session.isAuthenticated')) {
-      return this.transitionTo('files');
+      return this.replaceWith('files');
     }
-    this.transitionTo('login');
+    this.replaceWith('login');
   }
 });
