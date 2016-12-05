@@ -1,6 +1,6 @@
 footer#footer
   p.pad-lft
-    | &#0169; 2016 matjaz@grosek.si
+    | &#0169; 2016 matjaz+files&#64;grosek.si
 
 if errorMessage
   #floating-top-right.floating-container
